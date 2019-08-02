@@ -1,0 +1,13 @@
+{
+  "name": "saga-playground",
+  "version": "1.0.0",
+  "description": " ",
+  "keywords": [],
+  "main": "index.js",
+  "dependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "redux": "4.0.1",
+    "redux-saga": "1.0.3"
+  }
+}
