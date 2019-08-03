@@ -9,8 +9,7 @@ import {
   race,
   cancel
 } from "redux-saga/effects";
-import { flightSaga } from "./sagas/flightSaga";
-
+import flightSearchSaga from "./flightSearchSaga";
 
 function* incrementApiCall(action) {
   try {
@@ -103,8 +102,7 @@ function* incrementAsync(action) {
 export default function* rootSaga() {
   // yield takeLatest("INCREMENT_REQUEST", incrementAsync);
   yield takeEvery("INCREMENT_REQUEST", incrementAsync);
-
-  +++tu trzeba dodać flight saga
+  yield takeEvery("FLIGHT_SEARCH", flightSearchSaga);
 }
 
 async function incrementOnServer() {

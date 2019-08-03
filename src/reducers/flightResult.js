@@ -2,7 +2,7 @@ export default function flightResults(
   state = { quality: [], fast: [], cheap: [] },
   action
 ) {
-  // console.log("FROM REDUCER", action);
+  console.log("FROM REDUCER", action);
   switch (action.type) {
     case "SAVE_RESULTS":
       const { type, list } = action.payload;
@@ -16,6 +16,8 @@ export default function flightResults(
     case "CANCEL":
       return state;
     case "TIMEOUT":
+      return state;
+    case "FLIGHT_SEARCH":
       return state;
     default:
       return state;
