@@ -9,6 +9,7 @@ import {
   race,
   cancel
 } from "redux-saga/effects";
+import axios from "axios";
 
 function* incrementApiCall(action) {
   try {
@@ -74,7 +75,7 @@ function* incrementAsync(action) {
 //   console.log("koniec sagi");
 // }
 
-export default function* rootSaga() {
+export function* rootSaga() {
   // yield takeLatest("INCREMENT_REQUEST", incrementAsync);
   yield takeEvery("INCREMENT_REQUEST", incrementAsync);
 }
@@ -91,6 +92,7 @@ export const wait = ms =>
   new Promise(resolve => setTimeout(() => resolve(true), ms));
 
 async function doApiCall(type = "quality ") {
+  console.log("making api call");
   const url = "https://api.skypicker.com/flights";
   const queryParams = {
     fly_from: "LON",
@@ -108,6 +110,7 @@ async function doApiCall(type = "quality ") {
     console.log("Results", result.data);
     return result.data;
   } catch (error) {
+    console.error("got error:");
     console.error(error);
     return error;
   }
@@ -133,6 +136,7 @@ function* makeFlightSearch(action) {
   console.log("koniec sagi");
 }
 
-function* flightSaga() {
+export default function* flightSearchSaga() {
+  console.log("Root of flightSearchSaga");
   yield takeEvery("FLIGHT_SEARCH", makeFlightSearch);
 }

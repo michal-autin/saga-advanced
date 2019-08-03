@@ -14,6 +14,7 @@ FlightsSearch.propTypes = {
 };
 
 function FlightsSearch({ type, tickets }) {
+  console.log("Typ", type, "tickets", tickets);
   return (
     <div>
       <h3>{type}</h3>
