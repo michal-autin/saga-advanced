@@ -102,7 +102,7 @@ function* incrementAsync(action) {
 export default function* rootSaga() {
   // yield takeLatest("INCREMENT_REQUEST", incrementAsync);
   yield takeEvery("INCREMENT_REQUEST", incrementAsync);
-  yield takeEvery("FLIGHT_SEARCH", flightSearchSaga);
+  yield run("FLIGHT_SEARCH", flightSearchSaga);
 }
 
 async function incrementOnServer() {

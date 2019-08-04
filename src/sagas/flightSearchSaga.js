@@ -55,26 +55,6 @@ function* incrementAsync(action) {
   console.log("koniec sagi");
 }
 
-// function* incrementAsync(action) {
-//   console.log("FROM SAGA", action);
-//   console.log("początek sagi");
-//   console.log("rozpoczynam wyścig między trzema akcjami");
-//   const { complete, timeout } = yield race({
-//     complete: call(incrementOnServer), // zwiększenie licznika na serwerze
-//     timeout: delay(5000), // mineło n milisekund
-//     canceled: take(["CANCEL"]) // akcja typu CANCEL została wywołana
-//   });
-//   if (complete) {
-//     console.log("wywołuje akcję INCEREMENT");
-//     yield put({ type: "INCREMENT" });
-//   }
-//   if (timeout) {
-//     console.log("wywołuje akcję TIMEOUT");
-//     yield put({ type: "TIMEOUT" });
-//   }
-//   console.log("koniec sagi");
-// }
-
 export function* rootSaga() {
   // yield takeLatest("INCREMENT_REQUEST", incrementAsync);
   yield takeEvery("INCREMENT_REQUEST", incrementAsync);
