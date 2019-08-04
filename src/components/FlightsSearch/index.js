@@ -1,12 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FlightTicket from "../FlightTicket";
+import styled from "@emotion/styled/macro";
 
 const FlightsSearchTypes = {
   best: "optimal",
   chepest: "price",
   shortest: "duration"
 };
+
+const TicketList = styled.ul`
+  list-style: none;
+  /* list-style-position:  */
+
+  li:not(:last-child) {
+    margin-bottom: 30px;
+  }
+`;
 
 FlightsSearch.propTypes = {
   type: PropTypes.string.isRequired,
@@ -18,13 +28,13 @@ function FlightsSearch({ type, tickets }) {
   return (
     <div>
       <h3>{type}</h3>
-      <ul>
+      <TicketList>
         {tickets.map(ticket => (
-          <li>
-            <FlightTicket ticket={ticket} key={ticket.id} />
+          <li key={ticket.id}>
+            <FlightTicket ticket={ticket} />
           </li>
         ))}
-      </ul>
+      </TicketList>
     </div>
   );
 }

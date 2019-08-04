@@ -91,22 +91,23 @@ async function incrementOnServer() {
 export const wait = ms =>
   new Promise(resolve => setTimeout(() => resolve(true), ms));
 
-async function doApiCall(type = "quality ") {
+async function doApiCall(type = "quality") {
   console.log("making api call");
   const url = "https://api.skypicker.com/flights";
   const queryParams = {
     fly_from: "LON",
     fly_to: "SYD",
     v: 3,
-    date_from: "2019/12/01",
-    date_to: "2019/12/03",
+    date_from: "01/12/2019",
+    date_to: "09/12/2019",
     flight_type: "oneway",
     adults: 1,
     partner: "picky",
-    sort: type
+    sort: type,
+    limit: 10
   };
   try {
-    const result = await axios.get(url, queryParams);
+    const result = await axios.get(url, { params: queryParams });
     console.log("Results", result.data);
     return result.data;
   } catch (error) {
@@ -126,8 +127,11 @@ function* makeFlightSearch(action) {
     canceled: take(["CANCEL"])
   });
   if (complete) {
-    console.log("wywołuje akcję SAVE_RESULTS");
-    yield put({ type: "SAVE_RESULTS", payload: complete.payload });
+    console.log("wywołuje akcję SAVE_RESULTS:", complete);
+    yield put({
+      type: "SAVE_RESULTS",
+      payload: { type: "quality", list: complete.data }
+    });
   }
   if (timeout) {
     console.log("wywołuje akcję TIMEOUT");
